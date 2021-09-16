@@ -84,6 +84,11 @@ jobs:
         run: |
           pip install `find -L ./ -name "*.whl"`
 
+      - name: Update C++ Lib
+        if: runner.os != 'Windows'
+        run: |
+          strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBCXX
+
       - name: Import Package
         run: |
           python -c "import pydp; print(pydp.__version__)"
